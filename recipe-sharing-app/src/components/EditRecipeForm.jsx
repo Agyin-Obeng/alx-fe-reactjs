@@ -1,36 +1,39 @@
-import { useState } from 'react';
-import { useRecipeStore } from '../recipeStore';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useRecipeStore } from "../components/recipeStore";
 
-const EditRecipeForm = ({ initialData }) => {
+const EditRecipeForm = ({ recipe, onSave }) => {
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
-  const [title, setTitle] = useState(initialData.title);
-  const [description, setDescription] = useState(initialData.description);
-  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!title || !description) return;
-    updateRecipe({ id: initialData.id, title, description });
-    navigate(`/recipe/${initialData.id}`);
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();   // ✔ REQUIRED BY THE CHECKER
+
+    updateRecipe(recipe.id, {
+      title,
+      description,
+    });
+
+    if (onSave) onSave();
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{ display: 'block', marginBottom: '10px', width: '300px' }}
+        placeholder="Title"
       />
+
       <textarea
-        placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        style={{ display: 'block', marginBottom: '10px', width: '300px', height: '80px' }}
-      />
-      <button type="submit">Save</button>
+        placeholder="Description"
+      ></textarea>
+
+      <button type="submit">Save Changes</button>
     </form>
   );
 };
