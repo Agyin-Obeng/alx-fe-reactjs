@@ -1,12 +1,16 @@
+import SearchBar from "../components/SearchBar";
 import AddRecipeForm from "../components/AddRecipeForm";
 import RecipeList from "../components/RecipeList";
-import SearchBar from "../components/SearchBar";
+import FavoritesList from "../components/FavoritesList";
+import RecommendationsList from "../components/RecommendationsList";
 
 const Home = () => (
   <>
-    <SearchBar />      {/* 🔹 Add search bar here */}
+    <SearchBar />
     <AddRecipeForm />
     <RecipeList />
+    <FavoritesList />          {/* 🔹 Show favorites */}
+    <RecommendationsList />    {/* 🔹 Show recommendations */}
   </>
 );
 
