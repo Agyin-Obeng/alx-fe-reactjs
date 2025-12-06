@@ -1,22 +1,22 @@
-// src/components/AddRecipeForm.jsx
 import { useState } from 'react';
 import { useRecipeStore } from '../recipeStore';
+import { useNavigate } from 'react-router-dom';
 
-const AddRecipeForm = () => {
-  const addRecipe = useRecipeStore((state) => state.addRecipe);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+const EditRecipeForm = ({ initialData }) => {
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+  const [title, setTitle] = useState(initialData.title);
+  const [description, setDescription] = useState(initialData.description);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title || !description) return;
-    addRecipe({ id: Date.now(), title, description });
-    setTitle('');
-    setDescription('');
+    updateRecipe({ id: initialData.id, title, description });
+    navigate(`/recipe/${initialData.id}`);
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Title"
@@ -30,9 +30,9 @@ const AddRecipeForm = () => {
         onChange={(e) => setDescription(e.target.value)}
         style={{ display: 'block', marginBottom: '10px', width: '300px', height: '80px' }}
       />
-      <button type="submit">Add Recipe</button>
+      <button type="submit">Save</button>
     </form>
   );
 };
 
-export default AddRecipeForm;
+export default EditRecipeForm;
