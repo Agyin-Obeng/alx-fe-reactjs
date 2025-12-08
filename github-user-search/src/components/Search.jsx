@@ -71,6 +71,7 @@ function Search() {
             style={{ borderRadius: "50%" }}
           />
           <h3>{user.name || "No name available"}</h3>
+          <p><strong>Username:</strong> {user.login}</p>  {/* <- Add this line */}
           <a href={user.html_url} target="_blank" rel="noopener noreferrer">
             View Profile
           </a>
