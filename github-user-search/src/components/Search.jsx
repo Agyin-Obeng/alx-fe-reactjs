@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { fetchAdvancedUserData } from "../services/githubService.js";
-
+import { fetchUserData } from "../services/githubService.js";
 function Search() {
   // Input states
   const [username, setUsername] = useState("");
@@ -24,7 +23,7 @@ function Search() {
       return;
     }
 
-    const result = await fetchAdvancedUserData({ username, location, minRepos });
+    const result = await fetchUserData({ username, location, minRepos });
 
     if (result.error) {
       setError(result.error);
