@@ -8,7 +8,7 @@ import axios from "axios";
  * @param {number|string} params.minRepos - optional
  * @returns {Promise<{data: Array, error: string|null}>}
  */
-export async function fetchAdvancedUserData({ username, location, minRepos }) {
+export async function fetchUserData({ username, location, minRepos }) {
   try {
     let query = `${username} in:login`;
     if (location) query += ` location:${location}`;
