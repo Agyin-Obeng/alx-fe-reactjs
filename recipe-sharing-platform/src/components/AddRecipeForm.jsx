@@ -3,17 +3,17 @@ import { useState } from "react";
 function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [steps, setSteps] = useState(""); // ✅ renamed
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simple validation
+    // Validation
     const newErrors = {};
     if (!title.trim()) newErrors.title = "Title is required";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
-    if (!instructions.trim()) newErrors.instructions = "Instructions are required";
+    if (!steps.trim()) newErrors.steps = "Steps are required"; // ✅ renamed
 
     setErrors(newErrors);
 
@@ -22,13 +22,13 @@ function AddRecipeForm() {
       console.log({
         title,
         ingredients: ingredients.split("\n"),
-        instructions: instructions.split("\n"),
+        steps: steps.split("\n"), // ✅ renamed
       });
 
       // Clear form
       setTitle("");
       setIngredients("");
-      setInstructions("");
+      setSteps("");
       alert("Recipe submitted successfully!");
     }
   };
@@ -69,17 +69,17 @@ function AddRecipeForm() {
           {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
         </div>
 
-        {/* Instructions */}
+        {/* Steps */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Instructions</label>
+          <label className="block text-gray-700 font-medium mb-2">Steps</label>
           <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="6"
             placeholder="Step-by-step preparation instructions"
           ></textarea>
-          {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
         {/* Submit Button */}
