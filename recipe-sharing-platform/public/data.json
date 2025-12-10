@@ -1,20 +1,44 @@
 [
-    {
-        "id": 1,
-        "title": "Spaghetti Carbonara",
-        "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-        "image": "https://via.placeholder.com/150"
-    },
-    {
-        "id": 2,
-        "title": "Chicken Tikka Masala",
-        "summary": "Chunks of grilled chicken cooked in a rich, creamy, tomato-based gravy.",
-        "image": "https://via.placeholder.com/150"
-    },
-    {
-        "id": 3,
-        "title": "Beef Stew",
-        "summary": "Tender beef simmered with vegetables in a deeply flavored broth.",
-        "image": "https://via.placeholder.com/150"
-    }
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 large eggs",
+      "50g Parmesan cheese",
+      "Salt and pepper"
+    ],
+    "instructions": [
+      "Cook spaghetti according to package instructions.",
+      "Fry pancetta until crispy.",
+      "Beat eggs and mix with Parmesan cheese.",
+      "Combine spaghetti with pancetta and remove from heat.",
+      "Stir in egg and cheese mixture quickly to avoid scrambling eggs.",
+      "Season with salt and pepper, serve immediately."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken cooked in a rich, creamy, tomato-based gravy.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breast",
+      "2 tbsp yogurt",
+      "1 tbsp garam masala",
+      "1 onion, chopped",
+      "200g tomato puree",
+      "100ml cream"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and spices for 1 hour.",
+      "Grill chicken until cooked through.",
+      "Fry onions until golden, add tomato puree and cream.",
+      "Add grilled chicken to sauce and simmer for 10 minutes.",
+      "Serve hot with rice or naan."
+    ]
+  }
 ]
