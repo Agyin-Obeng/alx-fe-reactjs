@@ -6,7 +6,6 @@ function AddRecipeForm() {
   const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  // ✅ Validation function
   const validate = () => {
     const newErrors = {};
     if (!title.trim()) newErrors.title = "Title is required";
@@ -18,18 +17,16 @@ function AddRecipeForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const validationErrors = validate(); // ✅ call validate
+    const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // For now, just log the data
       console.log({
         title,
         ingredients: ingredients.split("\n"),
         steps: steps.split("\n"),
       });
 
-      // Clear form
       setTitle("");
       setIngredients("");
       setSteps("");
@@ -41,9 +38,9 @@ function AddRecipeForm() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-xl shadow-lg p-8 w-full max-w-lg"
+        className="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-md md:max-w-lg"
       >
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800 text-center">
           Add New Recipe
         </h2>
 
@@ -54,7 +51,7 @@ function AddRecipeForm() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 md:px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter recipe title"
           />
           {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
@@ -66,7 +63,7 @@ function AddRecipeForm() {
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 md:px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="4"
             placeholder="List ingredients, one per line"
           ></textarea>
@@ -79,7 +76,7 @@ function AddRecipeForm() {
           <textarea
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 md:px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="6"
             placeholder="Step-by-step preparation instructions"
           ></textarea>
