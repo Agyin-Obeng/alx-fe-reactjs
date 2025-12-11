@@ -1,59 +1,52 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function RecipeDetail() {
-  const { id } = useParams();
-  const [recipe, setRecipe] = useState(null);
+function HomePage() {
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     fetch("/data.json")
       .then((res) => res.json())
-      .then((data) => {
-        const found = data.find((item) => item.id === parseInt(id));
-        setRecipe(found);
-      });
-  }, [id]);
-
-  if (!recipe) return <div className="text-center mt-20 text-xl">Loading...</div>;
+      .then((data) => setRecipes(data))
+      .catch((err) => console.error("Error loading recipes:", err));
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-        <Link to="/" className="block text-blue-600 hover:text-blue-800 font-medium p-6">
-          ← Back to Recipes
-        </Link>
+    <div className="min-h-screen bg-gray-100 py-12 px-6">
+      <h1 className="text-4xl font-bold text-center text-blue-700 mb-12">
+        Recipe Sharing Platform
+      </h1>
 
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          className="w-full h-64 object-cover"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {recipes.map((recipe) => (
+          <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
+            <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              
+              <img
+                src={recipe.image}
+                alt={recipe.title}
+                className="w-full h-48 object-cover"
+              />
 
-        <div className="p-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">{recipe.title}</h1>
-          <p className="text-gray-700 mb-6">{recipe.summary}</p>
+              <div className="p-6 flex flex-col">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                  {recipe.title}
+                </h2>
 
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-2">Ingredients</h2>
-            <ul className="list-disc pl-6 space-y-1 text-gray-700">
-              {recipe.ingredients.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
+                <p className="text-gray-600 mb-4">
+                  {recipe.summary}
+                </p>
 
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-2">Instructions</h2>
-            <ol className="list-decimal pl-6 space-y-2 text-gray-700">
-              {recipe.instructions.map((step, index) => (
-                <li key={index}>{step}</li>
-              ))}
-            </ol>
-          </div>
-        </div>
+                <span className="text-blue-600 font-medium hover:underline">
+                  View Recipe →
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
 }
 
-export default RecipeDetail;
+export default HomePage;
