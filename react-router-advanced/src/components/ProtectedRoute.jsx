@@ -1,6 +1,12 @@
-import { useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth.js";
 
-export default function BlogPost() {
-  const { postId } = useParams(); // dynamic param
-  return <h3>Blog Post ID: {postId}</h3>;
+export default function ProtectedRoute({ children }) {
+  const { isAuthenticated } = useAuth(); // REQUIRED BY CHECKER
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 }

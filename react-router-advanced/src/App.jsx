@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -18,12 +17,14 @@ import BlogPost from "./components/BlogPost.jsx";
 import Login from "./components/Login.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
+// Custom auth hook
+import useAuth from "./hooks/useAuth.js";
+
 // Create QueryClient
 const queryClient = new QueryClient();
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const handleLogin = () => setIsAuthenticated(true);
+  const { isAuthenticated, login } = useAuth(); // useAuth replaces local state
 
   return (
     <QueryClientProvider client={queryClient}> {/* REQUIRED BY CHECKER */}
@@ -59,7 +60,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <ProtectedRoute> {/* ProtectedRoute now uses useAuth internally */}
                     <Profile />
                   </ProtectedRoute>
                 }
@@ -73,7 +74,7 @@ function App() {
               <Route path="/blog/:id" element={<BlogPost />} />
 
               {/* Login route */}
-              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+              <Route path="/login" element={<Login onLogin={login} />} />
             </Routes>
           </section>
         </div>
